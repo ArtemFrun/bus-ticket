@@ -1,26 +1,52 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container result__tiket">
+      <ListBus
+      v-bind:buses="buses"
+      @viewTickets="Tikets"
+    />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ListBus from './components/ListBus.vue';
+
 
 export default {
   name: 'App',
+  data(){
+    return{
+      buses:[]
+    }
+  },
+  mounted(){
+    fetch(' http://localhost:3000/bus')
+    .then((response) => response.json())
+    .then((json) => {
+      this.buses = json;
+    });
+
+  },
+  methods:{
+    Tikets(object){
+      console.log(object);
+    }
+  },
   components: {
-    HelloWorld
-  }
+    ListBus,
+}
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.container{
+  max-width: 1344px !important;
+  width: 1344px !important;
+  margin: auto;
+  position: relative;
+}
+
+.result__tiket{
+  padding: 3rem 2rem !important;
+  display: block;
 }
 </style>
