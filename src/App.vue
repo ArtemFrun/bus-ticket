@@ -1,21 +1,34 @@
 <template>
   <div class="container result__tiket">
-      <ListBus
+      <!-- <ListBus
       v-bind:buses="buses"
       @viewTickets="Tikets"
-    />
+    /> -->
+    <div v-if="component == 'ListBus'">
+      <component :is="component" 
+      v-bind:buses="buses"
+      @viewTickets="Tikets"></component>
+    </div>
+    <div v-else>
+      <component :is="component" 
+      v-bind:tickets="tickets"
+      ></component>
+    </div>
+    
   </div>
 </template>
 
 <script>
 import ListBus from './components/ListBus.vue';
-
+import Tiket from './components/Ticket.vue';
 
 export default {
   name: 'App',
   data(){
     return{
-      buses:[]
+      buses:[],
+      tickets: [],
+      component: 'Tiket'
     }
   },
   mounted(){
@@ -24,15 +37,22 @@ export default {
     .then((json) => {
       this.buses = json;
     });
+    fetch(' http://localhost:3000/tickets')
+    .then((response) => response.json())
+    .then((json) => {
+      this.tickets = json;
+    });
 
   },
   methods:{
     Tikets(object){
       console.log(object);
+      this.component = 'Tiket'
     }
   },
   components: {
     ListBus,
+    Tiket
 }
 }
 </script>

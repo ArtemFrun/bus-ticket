@@ -1615,7 +1615,7 @@
         }
       }
     }],
-"tikets" :[
+"tickets" :[
   {
     "tripId": "eyJ0cmlwX2lkIjo5MTUwLCJmcm9tX2lkIjo0OSwidG9faWQiOjIxfQ==",
     "baggMaxCnt": "5",
@@ -1788,8 +1788,7 @@
               "free": 1
             },
             {
-              "n": 20,
-              "free": 1
+              "n": 20
             },
             {
               "n": 24,
@@ -1805,8 +1804,7 @@
               "svc": "none"
             },
             {
-              "n": 1,
-              "free": 1
+              "n": 1
             },
             {
               "n": 3,
@@ -1821,8 +1819,7 @@
               "free": 1
             },
             {
-              "n": 15,
-              "free": 1
+              "n": 15
             },
             {
               "n": 19,
