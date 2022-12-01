@@ -12,6 +12,7 @@
     <div v-else>
       <component :is="component" 
       v-bind:tickets="tickets"
+      @backBtn="BackBtn"
       ></component>
     </div>
     
@@ -28,7 +29,7 @@ export default {
     return{
       buses:[],
       tickets: [],
-      component: 'Tiket'
+      component: 'ListBus'
     }
   },
   mounted(){
@@ -48,6 +49,9 @@ export default {
     Tikets(object){
       console.log(object);
       this.component = 'Tiket'
+    },
+    BackBtn(){
+      this.component = 'ListBus'
     }
   },
   components: {

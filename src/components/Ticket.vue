@@ -1,7 +1,7 @@
 <template>
-    <div class="">
+    <div class="" v-for="ticket in tickets">
         <div class="ticket result-tickets-items">
-                <div class="ticket-info row row-cols-1 row-cols-md-1" v-for="tiket in tickets">
+                <div class="ticket-info row row-cols-1 row-cols-md-1">
                     <div class="bus__column col">
                         <div class="d-inline-block">
                             <div class="passenger-title">Пасажир 1</div>
@@ -55,7 +55,7 @@
                                                     <svg version="1.1" viewBox="0 0 40 40" class="svg-icon" style="width: 40px; height: 40px;"><path fill="#ccc" stroke="none" d="m38 20c0-9.94-8.06-18-18-18s-18 8.06-18 18 8.06 18 18 18 18-8.06 18-18zm-4.5 0c0 5.86-3.77 10.81-9 12.67v-25.34c5.23 1.86 9 6.81 9 12.67zm-15.75 0c0-1.24 1.01-2.25 2.25-2.25s2.25 1.01 2.25 2.25-1.01 2.25-2.25 2.25-2.25-1.01-2.25-2.25zm2.25-13.5c0 6.15-5.92 11.13-13.27 11.23 1.09-6.36 6.6-11.23 13.27-11.23zm-13.27 15.77c7.35 0.1 13.27 5.08 13.27 11.23-6.67 0-12.18-4.87-13.27-11.23z" class="zu-wheel"></path></svg>
                                                 </div>
                                                 <div class="places__info" >
-                                                    <div class="places__view" v-for="places in tiket.busTempl.matrix[0]">
+                                                    <div class="places__view" v-for="places in ticket.busTempl.matrix[0]">
                                                         <div class="col" v-for="place in places">
                                                             <div class="place__set" v-if="(typeof(place.n) !== 'undefined')" v-bind:class="[place.free == '1' ? freeClass : disableClass, (place.n == seatS) ? activeClass : '']" >
                                                                 <div class="" v-if="place.free == '1'" @click="selectSeat(place.n)">
@@ -78,7 +78,7 @@
                                 <div class="bus__column col">
                                     <div class="d-inline-block">
                                         <p class="bus__way">
-                                            <span>{{" " + tiket.cityDepName + " - " + tiket.cityArrName + " "}}</span>
+                                            <span>{{" " + ticket.cityDepName + " - " + ticket.cityArrName + " "}}</span>
                                         </p>
                                         <p class="bus__carrier">
                                             <span>ДЕНИСІВКА ТДВ надає можливість вибрати місце в автобусі</span>
@@ -90,7 +90,7 @@
                         <div class="bus__column col-sm-1 col-md-1 d-flex__al-center">
                             <div class="d-inline-block price">
                                 <p>
-                                    <span>{{" " + tiket.pricePass + " " + tiket.priceCName + " "}}</span>
+                                    <span>{{" " + ticket.pricePass + " " + ticket.priceCName + " "}}</span>
                                 </p>
                             </div>
                         </div>
@@ -110,9 +110,9 @@
                     </div>
                 </div>
             </div>
-            <div class="contact-info container">
+            <div class="contact-info">
                 <div class="contact-info__wrapper">
-                    <div class="contact__info">
+                    <div class="contact__info mb-2">
                         <div class="">Контактна інформація</div>
                         <div class="row row-cols-md-2 row-cols-2">
                             <div class="col-sm-4 col-md-4">
@@ -130,14 +130,38 @@
                         </div>
                     </div>
                     <div class="checkbox-block">
-                        <div class="input-group">
-                            <div class="input-group-text ">
-                                <input class="form-check-input mt-0" type="checkbox" name="term" id="term">
+                        <div class="input-group input__checkbox-block mb-3">
+                            <div class="">
+                                <input class="form-check-input mt-0 input__checkbox" type="checkbox" name="term" id="term">
                             </div>
                             <label for="term">Я приймаю умови повернення, публічної 
-                                <a href=""> оферти </a>
+                                <a href="/oferta.pdf" target="_blank">оферти</a>
                                 і даю згоду на обробку персональних даних.
                             </label>
+                        </div>
+                    </div>
+                    <div class="row row-cols-md-2">
+                        <div class="col-sm-8 col-md-8">
+                            <div class="row row-cols-md-2 row-cols-2 final__price">
+                                <div class="col-sm-2 col-md-2">
+                                    <p>Разом:</p>
+                                </div>
+                                <div class="col-sm-10 col-md-10">
+                                    <div class="price">
+                                        <p>{{" " + ticket.pricePass + ".00 " + ticket.priceCName + " "}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                            <div class="row row-cols-md-2 row-cols-2">
+                                <div class="col">
+                                    <button type="button" class="btn btn-style" @click="backBtn()">Назад</button>
+                                </div>
+                                <div class="col">
+                                    <button type="button" class="btn btn-style">Сплатити</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -168,6 +192,9 @@ export default{
         selectSeat(value){
             this.seatS = value;
             this.buttonText = 'Змінити місце ('+value+')';
+        },
+        backBtn(){
+            this.$emit('backBtn');
         }
     }
 }
@@ -351,4 +378,34 @@ p {
     align-items: center;
 }
 
+.input__checkbox-block{
+    align-items: baseline !important;
+}
+
+.input__checkbox-block div{
+    padding: 0.75rem;
+}
+
+.input__checkbox-block a{
+    text-decoration: none;
+}
+
+.input__checkbox{
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    border-radius: 3px !important;
+    
+}
+
+.final__price{
+    font-size: 2rem !important;
+}
+
+.btn-style{
+    background-color: #cc004d !important;
+    color: #fff !important;
+    border: 0px !important;
+    width: 100%;
+    border-radius: 3px !important;
+}
 </style>
