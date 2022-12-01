@@ -1,7 +1,7 @@
 <template>
     <div class="">
         <div class="ticket result-tickets-items">
-                <div class="ticket-info row row-cols-1 row-cols-md-1 mb-3" v-for="tiket in tickets">
+                <div class="ticket-info row row-cols-1 row-cols-md-1" v-for="tiket in tickets">
                     <div class="bus__column col">
                         <div class="d-inline-block">
                             <div class="passenger-title">Пасажир 1</div>
@@ -77,18 +77,18 @@
                                 </div>
                                 <div class="bus__column col">
                                     <div class="d-inline-block">
-                                        <p>
+                                        <p class="bus__way">
                                             <span>{{" " + tiket.cityDepName + " - " + tiket.cityArrName + " "}}</span>
                                         </p>
-                                        <p>
+                                        <p class="bus__carrier">
                                             <span>ДЕНИСІВКА ТДВ надає можливість вибрати місце в автобусі</span>
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="bus__column col-sm-1 col-md-1">
-                            <div class="d-inline-block">
+                        <div class="bus__column col-sm-1 col-md-1 d-flex__al-center">
+                            <div class="d-inline-block price">
                                 <p>
                                     <span>{{" " + tiket.pricePass + " " + tiket.priceCName + " "}}</span>
                                 </p>
@@ -101,10 +101,43 @@
                         </div>
                     </div>
                     <div class="bus__column col">
-                        <div class="d-inline-block">
-                            <p>
-                                <span></span>
-                            </p>
+                        <div class="d-block">
+                            <label for="note">Примітка</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control input__text" placeholder="Примітка" aria-label="note" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-info container">
+                <div class="contact-info__wrapper">
+                    <div class="contact__info">
+                        <div class="">Контактна інформація</div>
+                        <div class="row row-cols-md-2 row-cols-2">
+                            <div class="col-sm-4 col-md-4">
+                                <label for="E-mail">E-mail</label>
+                                <div class="input-group">
+                                    <input type="email" class="form-control input__text" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4">
+                                <label for="phone">Телефон</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control input__text" placeholder="Телефон" aria-label="phone   " aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkbox-block">
+                        <div class="input-group">
+                            <div class="input-group-text ">
+                                <input class="form-check-input mt-0" type="checkbox" name="term" id="term">
+                            </div>
+                            <label for="term">Я приймаю умови повернення, публічної 
+                                <a href=""> оферти </a>
+                                і даю згоду на обробку персональних даних.
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -300,4 +333,22 @@ p {
 {
     fill: #65bb69;
 }
+
+.bus__way{
+    color: #7a7a7a!important;
+}
+
+.bus__carrier{
+    font-size: 0.75rem !important;
+}
+
+.price{
+    color: #cc004d !important
+}
+
+.d-flex__al-center{
+    display: flex;
+    align-items: center;
+}
+
 </style>
